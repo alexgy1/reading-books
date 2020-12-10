@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <ul id="navigation">
+        <li>
+            <a href="index.html" accesskey="1">Home</a>
+            <a href="search.html" accesskey="4" > Search</a>
+            <a href="contact.html" accesskey="9">Contact</a>
+        </li>
+    </ul> -->
+    <a href="index.html" accesskey="1">Home</a>
+            <a href="search.html" accesskey="4" > Search</a>
+            <a href="contact.html" accesskey="9">Contact</a>
+    <h1>what is the Document Object Model ?</h1>
+    <p> the <abbr title="wolrd wide web consortium">W3C</abbr> defines the <abbr title="Document Object Model">DOM</abbr>as: </p>
+    <blockquote cite="http://www.w3.org/DOM">
+        <p>
+            a patform and  language neutral 
+        </p>
+    </blockquote> 
+    <p>
+        this is an <abbr title="Application Programming Interface ">API</abbr> 
+    </p>  
+
+    <script>
+        function addLoadEvent(func){
+            //一个队列 但是里面的函数会被覆盖 不会执行？ 
+            let oldonLoad = window.onload
+            if(typeof window.onload !=='function'){
+                window.onload = func
+            }else{
+                window.onload = function(){
+                    oldonLoad()
+                    func()
+                }
+            }
+        }
+      
+
+        function displayAbbreviations(){
+            if(!document.getElementsByTagName || !document.createElement || !document.createTextNode) return false 
+            let defs = []  
+            //get all the abbreviations
+            let abbrs = document.getElementsByTagName('abbr')
+
+            if(abbrs.length < 1) return false 
+            
+            //lopp through the abbreviations 
+            for(let i=0; i< abbrs.length; i++){
+                let cur_abbr = abbrs[i]
+                if(cur_abbr.childNodes.length < 1) continue // if no childnodes begin next loop  for ie 
+                let title = cur_abbr.getAttribute('title')
+                let key = cur_abbr.lastChild.nodeValue
+
+                 defs[key] = title
+            }
+        
+            //create the definition list 
+            var dList = document.createElement('dl')
+            //loop through the definitions
+            for(key in defs){
+                //create the definiton title
+                var title = defs[key]
+                var dTitle = document.createElement('dt')
+                var dTText = document.createTextNode(key)
+                dTitle.appendChild(dTText)
+                //creaet the definition description
+                var dDitle = document.createElement('dd')
+                var ddText = document.createTextNode(title)
+                dDitle.appendChild(ddText)
+                //add them to the definiiton list 
+                dList.appendChild(dTitle)
+                dList.appendChild(dDitle)
+            }
+            if(dList.length < 1 ) return false  //handle for ie maybe dList length = 0 
+            //这里不需要浏览器嗅探的代码 而且浏览器的版本和版本号嗅探很难做到面面俱到
+            //creae a headline 
+            var header = document.createElement('h2')
+            var header_text = document.createTextNode('abbreviations')
+            header.appendChild(header_text)
+
+            //HTML-CORE
+            //add the headline to the body 
+            document.body.appendChild(header)
+            //add the definition list to the body 
+            document.body.appendChild(dList)
+
+        }
+        
+        addLoadEvent(displayAbbreviations)
+
+        //遍历所有 blockquote 元素, 从中取出cite属性值，创建一个标识文本 是source的链接
+        //把这个链接赋值为 blockquote元素的cite属性值
+        //把这个链接插入文献节选的末尾
+
+        function displayCitations(){
+            if(!document.getElementsByTagName || !document.createElement || !document.createTextNode) return false 
+            let blockquotes = document.getElementsByTagName('blockquote')
+
+            for(let i=0; i<blockquotes.length; i++){
+                let now = blockquotes[i]
+                let citeVal = now.getAttribute('cite')
+                if(!citeVal) continue
+                //lastChildElement 
+                var quoteChildren = now.getElementsByTagName('*')
+                if(quoteChildren.length < 1) continue
+                var elem = quoteChildren[quoteChildren.length -1]
+
+                var link = document.createElement('a')
+                var link_text = document.createTextNode('source')
+
+                link.appendChild(link_text)
+                link.setAttribute('href', citeVal)
+                elem.appendChild(link)
+            }
+        }
+        addLoadEvent(displayCitations)
+
+        function displayAccessKeys(){
+            if(!document.getElementsByTagName ||!document.createElement || !document.createTextNode)  return false
+            var links = document.getElementsByTagName('a')
+            var aKeys = []
+
+            for(var i=0; i<links.length; i++){
+                var current_link = links[i]
+
+                var nowAccessKey = current_link.getAttribute('accesskey')
+                if(!nowAccessKey) continue
+                var text = current_link.lastChild.nodeValue
+                aKeys[nowAccessKey] = text 
+            }
+            var list  = document.createElement('ul')
+
+            //create the list 
+            for(key in aKeys){
+                var text = aKeys[key]
+
+                var str = key + ": " + text 
+                var item = document.createElement('li')
+                var item_text = document.createTextNode(str)
+                item.appendChild(item_text)
+                list.appendChild(item)
+            }
+
+            var header = document.createElement('h3')
+            var header_text = document.createTextNode('AccessKeys')
+            header.appendChild(header_text)
+
+            document.body.appendChild(header)
+            document.body.appendChild(list)
+
+        }
+        addLoadEvent(displayAccessKeys)
+    </script>
+</body>
+</html>

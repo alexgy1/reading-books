@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="app">
+        <p> this is <em>my</em> content.</p>
+    </div>
+    <script>
+        //  document.body.innerHTML('<p>hello world document wirte </p>') 
+        // document.write('<p>hello world document wirte </p>') 
+        // document.write('<p>hello world document wirte2s </p>') 
+        // //会追加 
+        
+
+        // insertText('aaa')
+        // insertText('bbb')
+        // document.write('<p>hello world document wirte </p>') 
+        // document.write('<p>hello world document wirte2s </p>') 
+
+
+        // function insertText(txt){
+        //     let str = `<p>${txt}</p>`
+        //     document.write(str)
+        // }
+
+
+        // window.onload = init
+
+
+        function init(){
+            let app = document.getElementById('app')
+            console.log(app.innerHTML)// <p> this is <em>my</em> content.</p>
+            console.log(typeof app.innerHTML) //string  
+            
+            //innerHTML 像大锤那样粗放
+            // dom对象 像手术刀一样精细
+            //大锤有自己的用武之地 把一大段html内容插入网页的时候 innerHTML属性更适用 既支持读取 又支持写入  全部替换
+            app.innerHTML = '<p> this is <em>my</em> new  content. set by innerHTML </p>'
+            // innerHTML是html的专有属性 
+            //dom实现要费一些周折
+        }
+
+        window.onload = initByDomMethod
+
+        function initByDomMethod(){
+            let app = document.getElementById('app')
+            let p = document.createElement('p')
+            let str = `nodeName : ${p.nodeName} nodeType : ${p.nodeType}` //p  1 
+            // alert(str)
+            let text = document.createTextNode('create by document.createTextNode')
+            
+            app.appendChild(p)
+            p.appendChild(text)
+            //appendChild 还支持 先创建节点 插入到父元素里面 再把父元素统一插入到 app里面 
+        }
+
+        
+        </script>
+</body>
+</html>

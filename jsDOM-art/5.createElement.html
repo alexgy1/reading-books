@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <img src="" alt="" id="img"  width="300" height="300"   >
+
+   
+            <li id="apple">apple </li>
+
+    <script>
+        
+        
+        /**
+         *  p  this is em my content
+         * 
+         * 
+         * */
+        
+        function createElem(){
+            let op = document.createElement('p')
+            let t1 = document.createTextNode('this is ')
+            let oEm = document.createElement('em')
+            oEm.appendChild(document.createTextNode('my'))
+            let t2 = document.createTextNode(' content')
+
+            // document.body.appendChild(op)
+            op.appendChild(t1)
+            op.append(oEm)
+            // document.body.appendChild(op)
+            op.appendChild(t2)
+            document.body.appendChild(op)
+        }
+
+        // window.onload = createElem
+
+        
+
+        function imgGallary(){
+            let oImg = document.createElement('img')
+            oImg.setAttribute('id' , 'oImg')
+            oImg.setAttribute('src' , '')
+            oImg.setAttribute('alt', 'my img gallary ')
+            var des = document.createElement('p')
+            des.setAttribute('id', 'des')
+            var desText = document.createTextNode('choose an image ')
+
+            des.appendChild(desText)
+
+            document.body.appendChild(oImg)
+            document.body.appendChild(des)
+
+        }
+        // window.onload = imgGallary
+
+
+        function insertBeforeDemo(){
+            //已有元素前面插入一个新的元素
+            let  oImg = document.getElementById('img')
+            var des = document.createElement('p')
+            des.setAttribute('id', 'des')
+            var desText = document.createTextNode('choose an image ')
+            des.appendChild(desText)
+
+            oImg.parentNode.insertBefore(des, oImg)
+
+        }
+
+        //在已有的元素插入新的元素  insertBefore(newElement, targetElement)
+        //parentElement.insertBefore(newEle, targetEle)
+        //targetElement.parentNode 不必搞清楚 它的父元素是谁  直接通过这个属性就可以取到 
+        
+        // window.onload = insertBeforeDemo
+
+
+        //insertAfter(newEle, targetEle) 
+        function insertAfter(newEle, targetEle){
+            let parent = targetEle.parentNode
+            console.log(parent , 'parent')
+            try {
+                    if(parent.lastChild == targetEle){
+                        parent.appendChild(newEle)
+                    }else{
+                        // targetEle is not the last ele meaning is must have the nextSibling
+                        parent.insertBefore(newEle, targetEle.nextSibling)
+                    }
+            } catch (e) {
+                console.log(e)
+            }
+        }
+
+        // function insertAfter(newNode, referenceNode) {
+        //     referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+        // }
+
+            window.onload = function(){
+                let apple = document.getElementById('apple')
+                let text = document.createElement('span')
+                text.innerHTML = 'test insertafter '
+                insertAfter(text,apple)
+            }
+
+        // insertAfter(apple, text)//not work when the ele is null 
+        //https://stackoverflow.com/questions/4793604/how-to-insert-an-element-after-another-element-in-javascript-without-using-a-lib
+
+
+        
+        </script>
+</body>
+</html>

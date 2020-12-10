@@ -1,0 +1,102 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    margin: 1em 10%;
+    background-image: url(../../images/hcj.png);
+    background-attachment: fixed;
+    background-position: top left;
+    background-repeat: repeat-x;
+    max-width: 80em;
+}
+#header{
+    background-image: url(../../images/pc.png);
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    border-width: .1em;
+    border-style: solid;
+    border-bottom-width: 0;
+}
+
+#navigation ul{
+    width: 100%;
+    overflow: hidden;
+    border-left-width: .1em;
+    border-left-style: solid;
+}
+#navigation li{
+    display: inline;
+}
+#navigation li a{
+    display: block;
+    float: left;
+    padding: .5em 2em;
+    border-right: .1em solid;
+}
+#content{
+    border-width: .1em;
+    border-style: solid;
+    border-top-width: 0;
+    padding: 2em 10%;
+    line-height: 1.8em;
+}
+/* #preview{
+    width: 200px;
+    height: 200px;
+} */
+
+#slideShow{
+    width: 150px;
+    height: 150px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+}
+ #preview{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 99;
+} 
+
+h1{
+    color: #333;
+    font-variant-numeric: transparent;
+}
+a{
+    color: #c60;
+    background-color: transparent;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+ul{
+    padding: 0
+}
+li{
+    float: left;
+    padding: 1em;
+    list-style: none;
+}
+img{
+    clear: both;
+    display: block;    
+}
+.popup img{
+    display: inline-block;
+    widows: 30px;
+    height: 30px;
+}
+
+td{
+    padding: .5em 3em;
+}
+
+label{
+    display: block;
+}
+fieldset {
+    border: 0;
+  }

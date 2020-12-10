@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    #slideshow{
+        width: 200px;
+        height: 200px;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    </style>
+</head>
+<body>
+        <h1>web design</h1>
+        <p>this are the things you should know</p>
+        <ol id="linklist">
+            <li><a href="structure.html"> Choose </a></li>
+            <li><a href="structure.html"> Structure</a></li>
+            <li><a href="presentation.html">Presentation</a></li>
+            <li><a href="behavior.html">Behavior</a></li>
+        </ol>
+        <div id="slideshow">
+            <img src="images/hcj.png" alt="building blocks of web design " id="preview">
+        </div>
+
+        <script src="js/common.js"></script>
+        <script>
+            //将所有的图片生成一张集体照 形式组合图片
+            // 隐藏这张集体照图片的绝大部分
+            //当用户把鼠标指针悬停在某个链接的上方时 ，只显示这张集体照的一个部分
+
+            //overflow visible 
+            // hidden   裁剪溢出的部分
+            // scroll  溢出才有滚动条 
+            // auto   不显示滚动条
+
+            function prepareSlideShow(){
+                if(!document.getElementsByTagName) return false 
+                if(!document.getElementById) return false 
+
+                if(!document.getElementById('linklist')) return false
+                if(!document.getElementById('preview')) return false 
+
+                var preview = document.getElementById('preview')
+                 preview.style.position = 'absolute'
+
+
+                 var list = document.getElementById('linklist')
+                 var links = list.getElementsByTagName('a')
+
+                 for(let i=0; i< links.length; i++){
+                     links[i].onmouseover = function(){
+                         moveElement('preview' , -200* (i+1) , 0,10 )
+                     }
+                 }
+            }
+
+            addLoadEvent(prepareSlideShow)
+        </script>
+</body>
+</html>

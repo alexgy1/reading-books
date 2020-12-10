@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{
+            color:white;
+            background-color: black;
+        }
+        .special{
+            font-style: italic;
+        }
+        h1.special{
+            text-transform: uppercase;
+        }
+        #purchases{
+            border: 1px solid white;
+            background-color: #333;
+            color: #ccc;
+            padding: 1em;
+        }
+        #purchases li{
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="special text">What to buy</h1>
+    <p  class="special test ">Don't forget to buy the stuff.</p>
+    <ul id="purchases" >
+        <li>a tin of beans</li>
+        <li>Cheese</li>
+        <li>Milk</li>
+    </ul>
+    <p title="this is title">test </p>
+    <script>
+        let purchases = document.getElementById('purchases')
+        // console.log(purchases)
+        // console.log(typeof purchases) //object
+        // console.log(purchases.children)//元素节点
+        // console.log(purchases.childElementCount)
+       
+        // console.log(purchases.childNodes)// 元素节点加 文本节点 
+        // console.log(purchases.childNodes[0])//
+        // console.log(purchases.childNodes[1].innerHTML)// 
+        
+
+        // let oLi = document.getElementsByTagName('li')
+        // console.log(oLi)//HTMLCollection(3)
+        // console.log(oLi[0])
+        // console.log(typeof oLi)// object
+
+        // let allEles = document.getElementsByTagName('*')
+        // console.log(allEles)
+        // console.log(allEles.length)
+
+        let oSepcial = document.getElementsByClassName('special')
+        console.log(oSepcial)
+        console.log(oSepcial[0].className)
+        console.log(typeof oSepcial[0].className) //string 
+
+        let oPs = document.getElementsByTagName('p')
+
+        for(let i=0; i<oPs.length; i++){
+            let title = oPs[i].getAttribute('title')
+            // alert(title)
+            title && alert(title)
+            if(title){
+                oPs[i].setAttribute('title', 'new title')
+            }// page 45 3.6小结上面的那句话是错误的现在浏览器会更新
+        }
+
+    </script>
+</body>
+</html>

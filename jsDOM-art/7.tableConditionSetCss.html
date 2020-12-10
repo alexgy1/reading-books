@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{
+            font-family: Helvetica,Arial,  sans-serif;
+            background-color: #fff;
+            color:#000;
+        }
+
+        table{
+            margin: auto;
+            border: 1px solid #699;
+
+        }
+        caption{
+            margin: auto;
+            padding: .2em;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        th{
+            font-weight: normal;
+            font-style: italic;
+            text-align: left;
+            border: 1px dotted #699;
+            background-color: #9cc;
+            color: #000;
+        }
+        th,td{
+            width: 10em;
+            padding: .5em;
+        }
+    
+    </style>
+</head>
+<body>
+    <table>
+        <caption>Itinerary</caption>
+        <thead>
+            <tr>
+                <th>when</th>
+                <th>where</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>June 9th </td>
+                <td>Portland, <abbr title="Oregon">OR</abbr></td>
+            </tr>
+            <tr>
+                <td>June 10th</td>
+                <td>Seattle, <abbr title="Washington">WA</abbr></td>
+            </tr>
+            <tr>
+                <td>June 12th</td>
+                <td>Sacramento, <abbr title="California">CA</abbr></td>
+            </tr>
+        </tbody>
+    </table>
+    <script>
+              /** 
+         * 纯css或者 dom来设置样式 要考虑的是
+         * 这个问题最简单的解决方案是什么
+         * 那种解决方案会得到更多浏览器的支持
+         * 
+         * 不要有一种解决方案 而是多种解决方案的时候，选择一种，取最优的 
+         * 一般原则是 
+         * 呈现效果 用css
+         * 改变行为用 dom 
+         * 
+         * 根据行为改变效果 那就根据经验老表示
+         * 
+         * 
+         * */
+    
+    function addLoadEvent(func){
+           var oldOnLoad = window.onload
+
+           if(typeof window.onload !== 'function'){
+               window.onload = func
+           }else{
+               window.onload = function(){
+                oldOnLoad()
+                   func()
+               }
+           }
+       }
+
+        function stripeTables(){
+            if(!document.getElementsByTagName) return false 
+            var tables = document.getElementsByTagName('table')
+
+            for(var i=0; i<tables.length; i++){
+                var odd = false 
+
+                var rows = tables[i].getElementsByTagName('tr')
+                for(var j=0; j<rows.length; j++){
+                    if(odd == true){
+                        rows[j].style.backgroundColor = '#ffc'
+                        odd = false
+                    }else{
+                        odd = true
+                    }
+                }
+            }
+        }
+
+
+        function highlightRows(){
+            if(!document.getElementsByTagName) return false 
+            var rows = document.getElementsByTagName('tr')
+            for(var i=0; i<rows.length; i++){
+                rows[i].onmouseover = function(){
+                    this.style.fontWeight = 'bold'
+
+                }
+
+                rows[i].onmouseout = function(){
+                    this.style.fontWeight = 'normal'
+                }
+            }
+        }
+
+        addLoadEvent(stripeTables)
+        addLoadEvent(highlightRows)
+
+  
+         </script>
+</body>
+</html>

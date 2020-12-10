@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    
+    .activeClass{
+        font-weight: bold;
+        color:red;
+        font-size: 1.5em;
+    }
+    </style>
+</head>
+
+<body>
+    <p id="example" style="color:#999; font-family: Arial, Helvetica, sans-serif">
+    an example of paragraph</p>
+
+    <h1>Hold the front page</h1>
+    <p>this is the first paragraph leads you in </p>
+    <p>now you get the nitty-gritty of the story</p>
+    <p>the most imoortant information is delivered first </p>
+
+    <h1>Extra! Extra!</h1>
+    <p>further developments are unfolding</p>
+    <p>you can read all about it here </p>
+<script>
+        // style属性
+        // 如何检索样式信息
+        // 如何改变样式
+        /*
+        结构层 html
+        表示层 css
+        行为层 js
+
+        分离 
+
+        html搭建文档的结构
+        css设置文档的呈现效果
+        DOM脚本实现文档的行为
+
+        三种技术之间存在一些潜在重叠
+的区域 
+        dom技术可以改变网页的结构 createElement  appendChild  
+                */
+       
+        // alert(typeof para.nodeName)//string
+        // alert(typeof para.style)
+
+        // //element.style.color 
+        // alert(para.style.color) // #999的时候 会alert rgb(153, 153, 153) 
+
+        // //css 中是- js中是 camelCase 
+        // alert('font family is ' + para.style.fontFamily)
+
+        // //element.style 取不到style标签里面的元素  只能取到行内的样式
+
+
+
+        //set css 
+        // element.sytle.property = value 
+
+       window.onload = function(){
+        var para = document.getElementById('example')
+        para.style.color = 'black '
+       }
+
+       // tag class id set element style 
+
+       function getNextElement(node){
+            if(node.nodeType == 1){
+                return node 
+            }
+            if(node.nextSibling){
+                return getNextElement(node.nextSibling)
+            }
+            return null 
+       }
+
+
+       function addLoadEvent(func){
+           var oldOnLoad = window.onload
+
+           if(typeof window.onload !== 'function'){
+               window.onload = func
+           }else{
+               window.onload = function(){
+                oldOnLoad()
+                   func()
+               }
+           }
+       }
+
+       function styleHeaderSiblings(){
+           if(!document.getElementsByTagName) return false
+         var Oh1s = document.getElementsByTagName('h1')
+
+         for(var i=0; i<Oh1s.length; i++){
+             var elem =getNextElement(Oh1s[i].nextSibling)
+             addClass(elem, 'activeClass' )
+            //  elem.setAttribute('class', 'activeClass') //setAttribute 也可以 下次只需要改类名的内容就可以了
+            //  elem.className ='activeClass' //行为和表现分离  追加的话 += 
+            //  elem.style.fontWeight = 'bold'
+            //  elem.style.fontSize = '1.5em'
+            //  elem.style.color = 'red'
+         }
+
+       }
+
+       function addClass(ele, value){
+           if(!ele.className) ele.className = value
+           let newClassName = ele.className
+
+           newClassName += ' ' + value
+           ele.className  = newClassName
+       }
+       
+       addLoadEvent(styleHeaderSiblings)
+
+
+       // css 的 firstChild 或者lastChild 就可以统一设置了
+
+
+       //根据某种条件设置样式
+       //只想让链接在鼠标悬停在其上方时改变颜色， 就应该用css来解决这个问题
+       //hover 高亮fontWeight 
+
+       //基于className的方案 比基于style的方案 效果相同 但是通过js刷新className属性， 新的方案使得表现层和行为层更加解耦
+
+
+       //抽象 方便复用  逻辑一致 便于修改和调试 形成统一的标准
+    </script>
+</body>
+</html>
